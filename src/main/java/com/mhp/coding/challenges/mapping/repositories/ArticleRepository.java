@@ -4,6 +4,8 @@ import com.mhp.coding.challenges.mapping.models.db.Article;
 import com.mhp.coding.challenges.mapping.models.db.Image;
 import com.mhp.coding.challenges.mapping.models.db.ImageSize;
 import com.mhp.coding.challenges.mapping.models.db.blocks.*;
+
+import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -21,6 +23,7 @@ public class ArticleRepository {
         return result;
     }
 
+    @Nullable
     public Article findBy(Long id){
         return createDummyArticle(id);
     }

@@ -1,13 +1,7 @@
-buildscript {
-	ext {
-		springBootVersion = '2.0.5.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+plugins {
+    id 'org.springframework.boot' version '2.0.5.RELEASE'
+    id "org.jetbrains.kotlin.jvm" version "1.3.10"
+    id "org.jetbrains.kotlin.plugin.spring" version "1.3.10"
 }
 
 apply plugin: 'java'
@@ -17,14 +11,30 @@ apply plugin: 'io.spring.dependency-management'
 
 group = 'com.mhp.coding.challenges'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
 
-repositories {
-	mavenCentral()
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
+repositories {
+    jcenter()
+}
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-web')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib"
+    compile "org.jetbrains.kotlin:kotlin-reflect"
+    compile 'ma.glasnost.orika:orika-core:1.5.2'
+    compile 'io.github.classgraph:classgraph:4.4.12'
+
+    testCompile("io.strikt:strikt-core:0.17.0")
+    testCompile("org.mockito:mockito-core:2.23.0")
+    testCompile("com.nhaarman:mockito-kotlin-kt1.1:1.6.0")
 }
