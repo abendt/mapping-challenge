@@ -6,17 +6,17 @@ import com.mhp.coding.challenges.mapping.models.db.ImageSize
 import com.mhp.coding.challenges.mapping.models.db.blocks.*
 import com.mhp.coding.challenges.mapping.models.dto.blocks.GalleryBlockDto
 import org.junit.Test
-import java.util.*
-import strikt.api.*
+import strikt.api.expectThat
 import strikt.assertions.*
+import java.util.*
+import com.mhp.coding.challenges.mapping.models.dto.blocks.ImageBlock as ImageBlockDto
 import com.mhp.coding.challenges.mapping.models.dto.blocks.TextBlock as TextBlockDto
 import com.mhp.coding.challenges.mapping.models.dto.blocks.VideoBlock as VideoBlockDto
-import com.mhp.coding.challenges.mapping.models.dto.blocks.ImageBlock as ImageBlockDto
 
 class ArticleMapperTest {
 
     @Test
-    fun canMapEmptyArticle() {
+    fun canMapArticleWithoutBlocks() {
         val dto = ArticleMapper().map(anArticle())
 
         expectThat(dto) {
@@ -29,7 +29,7 @@ class ArticleMapperTest {
     }
 
     @Test
-    fun canMapArticleWithBlock() {
+    fun canMapArticleWithSingleBlock() {
         val blocks = setOf(aTextBlock("text", 2))
         val dto = ArticleMapper().map(anArticle(blocks))
 
@@ -77,9 +77,10 @@ class ArticleMapperTest {
 
     private fun aGalleryBlock() =
             GalleryBlock().apply {
-                val galleryImages = ArrayList<Image>()
-                galleryImages.add(createImage())
-                galleryImages.add(createImage())
+                val galleryImages = ArrayList<Image>().apply {
+                    add(createImage())
+                    add(createImage())
+                }
 
                 images = galleryImages
             }

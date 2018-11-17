@@ -38,13 +38,13 @@ class ArticleControllerTest {
     }
 
     @Test
-    fun `get by id returns status 2ßß when article was found`() {
+    fun `get by id returns status 200 when article was found`() {
         mockMvc.perform(MockMvcRequestBuilders.get("/article/4711"))
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful)
     }
 
     @Test
-    fun `get by id returns returns JSON`() {
+    fun `get by id returns returns JSON response`() {
         mockMvc.perform(MockMvcRequestBuilders.get("/article/4711"))
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id", CoreMatchers.equalTo(4711)))
@@ -52,7 +52,7 @@ class ArticleControllerTest {
     }
 
     @Test
-    fun `list returns returns JSON`() {
+    fun `list returns returns JSON response`() {
         mockMvc.perform(MockMvcRequestBuilders.get("/article"))
                 .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize<Any>(5)))

@@ -1,18 +1,29 @@
 package com.mhp.coding.challenges.mapping.repositories;
 
-import com.mhp.coding.challenges.mapping.models.db.Article;
-import com.mhp.coding.challenges.mapping.models.db.Image;
-import com.mhp.coding.challenges.mapping.models.db.ImageSize;
-import com.mhp.coding.challenges.mapping.models.db.blocks.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import com.mhp.coding.challenges.mapping.models.db.Article;
+import com.mhp.coding.challenges.mapping.models.db.Image;
+import com.mhp.coding.challenges.mapping.models.db.ImageSize;
+import com.mhp.coding.challenges.mapping.models.db.blocks.ArticleBlock;
+import com.mhp.coding.challenges.mapping.models.db.blocks.GalleryBlock;
+import com.mhp.coding.challenges.mapping.models.db.blocks.ImageBlock;
+import com.mhp.coding.challenges.mapping.models.db.blocks.TextBlock;
+import com.mhp.coding.challenges.mapping.models.db.blocks.VideoBlock;
+import com.mhp.coding.challenges.mapping.models.db.blocks.VideoBlockType;
 
 @Component
 public class ArticleRepository {
 
+    @NotNull
     public List<Article> all(){
         final List<Article> result = new ArrayList<>();
         result.add(createDummyArticle(1001L));
